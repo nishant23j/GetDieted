@@ -36,44 +36,8 @@ app.use(express.static(path.join(__dirname)));
 // ─────────────────────────────────
 // POST /api/diet  — Anthropic proxy
 // ─────────────────────────────────
-app.post('/api/diet', async (req, res) => {
-  const { messages, model, max_tokens } = req.body;
-
-  if (!messages || !Array.isArray(messages)) {
-    return res.status(400).json({ error: 'Invalid request body — messages array required.' });
-  }
-
-  try {
-    const anthropicRes = await fetch('https://api.anthropic.com/v1/messages', {
-      method: 'POST',
-      headers: {
-        'Content-Type':      'application/json',
-        'x-api-key':         API_KEY,          // ← key added SERVER-SIDE only
-        'anthropic-version': '2023-06-01',
-      },
-      body: JSON.stringify({
-        model:      model      || 'claude-opus-4-5',
-        max_tokens: max_tokens || 4096,
-        messages,
-      }),
-    });
-
-    const data = await anthropicRes.json();
-
-    if (!anthropicRes.ok) {
-      // Forward Anthropic's error with its status code
-      return res.status(anthropicRes.status).json({
-        error: data?.error?.message || 'Anthropic API error',
-      });
-    }
-
-    return res.json(data);
-
-  } catch (err) {
-    console.error('Proxy error:', err.message);
-    return res.status(502).json({ error: 'Could not reach Anthropic API. Check your internet connection.' });
-  }
-});
+const dietHandler = require('./api/diet');
+app.all('/api/diet', dietHandler);
 
 // ── Fallback: serve index.html for any unknown GET ──
 app.get('*', (req, res) => {
@@ -87,6 +51,6 @@ module.exports = app;
 if (require.main === module) {
   app.listen(PORT, () => {
     console.log(`\n🥗 GetDieted server running at http://localhost:${PORT}`);
-    console.log(`   API key: ${API_KEY.substring(0, 18)}... (hidden from browser)\n`);
+    console.log(`   API key: ${API_KEY.slice(0, 18)}... (hidden from browser)\n`);
   });
 }
