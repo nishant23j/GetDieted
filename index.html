@@ -1,0 +1,344 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>GetDieted — AI Indian Diet Planner</title>
+  <meta name="description" content="Generate a personalised Indian weight-loss diet plan powered by Claude AI. Crafted with traditional Indian foods, Ayurveda, and modern nutrition science." />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;0,700;1,300;1,400;1,600&family=DM+Sans:wght@300;400;500;600&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+
+  <!-- Noise texture overlay -->
+  <div class="grain" aria-hidden="true"></div>
+
+  <!-- Geometric background stripes -->
+  <div class="geo-bg" aria-hidden="true">
+    <div class="geo-stripe s1"></div>
+    <div class="geo-stripe s2"></div>
+    <div class="geo-stripe s3"></div>
+  </div>
+
+  <!-- ══ HEADER ══ -->
+  <header class="site-header" id="site-header">
+    <a class="logo" href="#">
+      <span class="logo-mark">G</span>
+      <span class="logo-text">et<em>Dieted</em></span>
+    </a>
+    <nav class="header-nav">
+      <span class="nav-pill">✦ AI-Powered</span>
+      <span class="nav-pill">✦ Indian Cuisine</span>
+      <span class="nav-pill">✦ Ayurvedic</span>
+    </nav>
+  </header>
+
+  <!-- ══ HERO ══ -->
+  <section class="hero">
+    <!-- Left: editorial typography -->
+    <div class="hero-left">
+      <p class="hero-eyebrow" data-anim="fade-up" data-delay="0">
+        <span class="eyebrow-line"></span>
+        Personalised Nutrition
+      </p>
+      <h1 class="hero-title" data-anim="fade-up" data-delay="1">
+        <span class="title-line t1">Your</span>
+        <span class="title-line t2"><em>Perfect</em></span>
+        <span class="title-line t3">Indian</span>
+        <span class="title-line t4">Diet Plan</span>
+      </h1>
+      <p class="hero-body" data-anim="fade-up" data-delay="2">
+        Science-backed meal plans crafted from traditional Indian cuisine — dal, sabzi, roti and beyond. Tailored to your body. Informed by Ayurveda.
+      </p>
+
+      <div class="hero-tags" data-anim="fade-up" data-delay="3">
+        <span class="tag">🌿 7-Day Plan</span>
+        <span class="tag">📊 Macro Goals</span>
+        <span class="tag">🫙 Ayurvedic Tips</span>
+        <span class="tag">💪 Exercise Pairing</span>
+      </div>
+    </div>
+
+    <!-- Right: hero image panel -->
+    <div class="hero-right" data-anim="reveal" data-delay="1">
+      <div class="hero-img-frame">
+        <div class="frame-corner fc-tl"></div>
+        <div class="frame-corner fc-tr"></div>
+        <div class="frame-corner fc-bl"></div>
+        <div class="frame-corner fc-br"></div>
+        <img src="thali.png" alt="Vibrant Indian Thali" class="hero-img"
+             onerror="this.style.display='none';this.nextElementSibling.style.display='flex'" />
+        <div class="hero-img-fallback">🥘</div>
+        <div class="img-label">Curated Indian Cuisine</div>
+      </div>
+      <div class="hero-stat-row">
+        <div class="h-stat"><strong>100%</strong><span>Indian Foods</span></div>
+        <div class="h-stat-sep">·</div>
+        <div class="h-stat"><strong>Claude AI</strong><span>Powered</span></div>
+        <div class="h-stat-sep">·</div>
+        <div class="h-stat"><strong>Free</strong><span>To Generate</span></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- scroll indicator -->
+  <div class="scroll-cue" data-anim="fade-up" data-delay="4">
+    <span>Fill your profile below</span>
+    <div class="scroll-arrow">
+      <svg width="16" height="24" viewBox="0 0 16 24" fill="none"><path d="M8 2v20M1 15l7 7 7-7" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+    </div>
+  </div>
+
+  <!-- ══ MAIN FORM ══ -->
+  <main class="main-wrap">
+
+    <!-- Section label -->
+    <div class="section-label" data-anim="fade-up" data-delay="0">
+      <span class="sl-num">01</span>
+      <span class="sl-text">Your Health Profile</span>
+      <span class="sl-line"></span>
+    </div>
+
+    <div class="form-shell" data-anim="fade-up" data-delay="1">
+      <form id="diet-form" novalidate>
+
+        <!-- ─ Gender ─ -->
+        <fieldset class="form-block">
+          <legend class="block-legend">
+            <span class="legend-icon">◈</span> Gender
+          </legend>
+          <div class="choice-row">
+            <label class="choice-card" id="gender-male-label">
+              <input type="radio" name="gender" value="Male" checked />
+              <span class="choice-inner">
+                <span class="choice-glyph">♂</span>
+                <span class="choice-name">Male</span>
+              </span>
+            </label>
+            <label class="choice-card" id="gender-female-label">
+              <input type="radio" name="gender" value="Female" />
+              <span class="choice-inner">
+                <span class="choice-glyph">♀</span>
+                <span class="choice-name">Female</span>
+              </span>
+            </label>
+            <label class="choice-card" id="gender-other-label">
+              <input type="radio" name="gender" value="Other" />
+              <span class="choice-inner">
+                <span class="choice-glyph">⚧</span>
+                <span class="choice-name">Other</span>
+              </span>
+            </label>
+          </div>
+        </fieldset>
+
+        <!-- ─ Biometrics ─ -->
+        <fieldset class="form-block">
+          <legend class="block-legend">
+            <span class="legend-icon">◈</span> Body Metrics
+          </legend>
+          <div class="metrics-grid">
+            <div class="metric-field">
+              <label class="mf-label" for="weight">Weight</label>
+              <div class="mf-input-wrap">
+                <input type="number" id="weight" class="mf-input" placeholder="70" min="30" max="300" required />
+                <span class="mf-unit">kg</span>
+              </div>
+            </div>
+            <div class="metric-field">
+              <label class="mf-label" for="height">Height</label>
+              <div class="mf-input-wrap">
+                <input type="number" id="height" class="mf-input" placeholder="170" min="100" max="250" required />
+                <span class="mf-unit">cm</span>
+              </div>
+            </div>
+            <div class="metric-field">
+              <label class="mf-label" for="age">Age</label>
+              <div class="mf-input-wrap">
+                <input type="number" id="age" class="mf-input" placeholder="28" min="10" max="100" required />
+                <span class="mf-unit">yrs</span>
+              </div>
+            </div>
+            <div class="metric-field metric-field--wide">
+              <label class="mf-label" for="calories">Daily Calories Burnt <span class="mf-hint">(TDEE)</span></label>
+              <div class="mf-input-wrap">
+                <input type="number" id="calories" class="mf-input" placeholder="2000" min="800" max="6000" required />
+                <span class="mf-unit">kcal</span>
+              </div>
+              <p class="mf-note">Sedentary desk job ≈ 1800–2200 kcal/day</p>
+            </div>
+          </div>
+        </fieldset>
+
+        <!-- ─ Diet Type ─ -->
+        <fieldset class="form-block">
+          <legend class="block-legend">
+            <span class="legend-icon">◈</span> Diet Preference
+          </legend>
+          <div class="choice-row choice-row--diet">
+            <label class="choice-card" id="diet-veg-label">
+              <input type="radio" name="diet" value="Vegetarian" checked />
+              <span class="choice-inner">
+                <span class="choice-glyph">🥦</span>
+                <span class="choice-name">Vegetarian</span>
+              </span>
+            </label>
+            <label class="choice-card" id="diet-nonveg-label">
+              <input type="radio" name="diet" value="Non-Vegetarian" />
+              <span class="choice-inner">
+                <span class="choice-glyph">🍗</span>
+                <span class="choice-name">Non-Veg</span>
+              </span>
+            </label>
+            <label class="choice-card" id="diet-egget-label">
+              <input type="radio" name="diet" value="Eggetarian" />
+              <span class="choice-inner">
+                <span class="choice-glyph">🥚</span>
+                <span class="choice-name">Eggetarian</span>
+              </span>
+            </label>
+            <label class="choice-card" id="diet-vegan-label">
+              <input type="radio" name="diet" value="Vegan" />
+              <span class="choice-inner">
+                <span class="choice-glyph">🌱</span>
+                <span class="choice-name">Vegan</span>
+              </span>
+            </label>
+          </div>
+        </fieldset>
+
+        <!-- ─ Supplements ─ -->
+        <fieldset class="form-block">
+          <legend class="block-legend">
+            <span class="legend-icon">◈</span> Supplements
+          </legend>
+          <label class="toggle-card" id="protein-powder-label">
+            <input type="checkbox" id="protein-powder" />
+            <span class="toggle-card-inner">
+              <span class="toggle-left">
+                <span class="toggle-emoji">🥛</span>
+                <span class="toggle-info">
+                  <span class="toggle-title">Protein Powder</span>
+                  <span class="toggle-sub">Include 2 shakes/day — morning & post-workout</span>
+                </span>
+              </span>
+              <span class="toggle-switch" aria-hidden="true">
+                <span class="toggle-knob"></span>
+              </span>
+            </span>
+          </label>
+        </fieldset>
+
+        <!-- ─ Activity & Goal ─ -->
+        <fieldset class="form-block">
+          <legend class="block-legend">
+            <span class="legend-icon">◈</span> Lifestyle
+          </legend>
+          <div class="two-col">
+            <div class="field-block">
+              <label class="fb-label" for="activity">Activity Level</label>
+              <div class="fb-select-wrap">
+                <select id="activity" class="fb-select">
+                  <option value="Sedentary (desk job, little/no exercise)">Sedentary — desk job</option>
+                  <option value="Lightly active (light exercise 1-3 days/week)">Lightly active — 1–3 days/week</option>
+                  <option value="Moderately active (moderate exercise 3-5 days/week)" selected>Moderately active — 3–5 days</option>
+                  <option value="Very active (hard exercise 6-7 days/week)">Very active — 6–7 days/week</option>
+                  <option value="Extra active (physical job + hard exercise)">Extra active — physical job</option>
+                </select>
+                <svg class="fb-chevron" width="14" height="14" viewBox="0 0 14 14" fill="none"><path d="M2 5l5 5 5-5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg>
+              </div>
+            </div>
+            <div class="field-block">
+              <label class="fb-label" for="goal">Weight Loss Goal</label>
+              <div class="fb-select-wrap">
+                <select id="goal" class="fb-select">
+                  <option value="Gradual (0.25 kg/week)">Gradual — 0.25 kg/week</option>
+                  <option value="Moderate (0.5 kg/week)" selected>Moderate — 0.5 kg/week</option>
+                  <option value="Aggressive (1 kg/week)">Aggressive — 1 kg/week</option>
+                </select>
+                <svg class="fb-chevron" width="14" height="14" viewBox="0 0 14 14" fill="none"><path d="M2 5l5 5 5-5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg>
+              </div>
+            </div>
+          </div>
+        </fieldset>
+
+        <!-- ─ Notes ─ -->
+        <fieldset class="form-block">
+          <legend class="block-legend">
+            <span class="legend-icon">◈</span> Allergies & Conditions
+            <span class="legend-opt">optional</span>
+          </legend>
+          <textarea id="notes" class="fb-textarea" placeholder="e.g. lactose intolerant, diabetic, no onion-garlic, hypothyroid…" rows="3"></textarea>
+        </fieldset>
+
+        <!-- ─ Submit ─ -->
+        <button type="submit" class="btn-generate" id="generate-btn">
+          <span class="btn-inner">
+            <span class="btn-label">Generate My Diet Plan</span>
+            <span class="btn-arrow">→</span>
+          </span>
+          <span class="btn-loading" aria-hidden="true">
+            <span class="btn-spinner"></span>
+            <span>Crafting your plan…</span>
+          </span>
+        </button>
+
+        <p class="form-footer-note">Powered by Claude AI · Not a substitute for professional medical advice</p>
+      </form>
+    </div>
+
+    <!-- ══ RESULT ══ -->
+    <div class="result-shell" id="result-section" style="display:none">
+      <div class="result-masthead">
+        <div class="rm-left">
+          <div class="section-label" style="margin-bottom:0">
+            <span class="sl-num">02</span>
+            <span class="sl-text">Your Personalised Plan</span>
+          </div>
+          <p class="rm-meta" id="result-meta"></p>
+        </div>
+        <div class="rm-actions">
+          <button class="action-btn" id="copy-btn">
+            <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg>
+            Copy
+          </button>
+          <button class="action-btn" id="print-btn">
+            <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 6 2 18 2 18 9"/><path d="M6 18H4a2 2 0 0 1-2-2v-5a2 2 0 0 1 2-2h16a2 2 0 0 1 2 2v5a2 2 0 0 1-2 2h-2"/><rect x="6" y="14" width="12" height="8"/></svg>
+            Print
+          </button>
+          <button class="action-btn action-btn--accent" id="regenerate-btn">
+            <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="23 4 23 10 17 10"/><path d="M20.49 15a9 9 0 1 1-2.12-9.36L23 10"/></svg>
+            Regenerate
+          </button>
+        </div>
+      </div>
+      <div class="result-body" id="result-body"></div>
+    </div>
+
+    <!-- ══ ERROR ══ -->
+    <div class="error-strip" id="error-box" style="display:none">
+      <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg>
+      <div>
+        <strong>Something went wrong</strong>
+        <p id="error-msg"></p>
+      </div>
+    </div>
+
+  </main>
+
+  <!-- ══ FOOTER ══ -->
+  <footer class="site-footer">
+    <div class="footer-inner">
+      <span class="footer-brand">GetDieted</span>
+      <span class="footer-sep">·</span>
+      <span>Made for a healthier India</span>
+      <span class="footer-sep">·</span>
+      <span>Claude AI</span>
+    </div>
+  </footer>
+
+  <script src="app.js"></script>
+</body>
+</html>
