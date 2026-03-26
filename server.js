@@ -80,7 +80,13 @@ app.get('*', (req, res) => {
   res.sendFile(path.join(__dirname, 'index.html'));
 });
 
-app.listen(PORT, () => {
-  console.log(`\n🥗 GetDieted server running at http://localhost:${PORT}`);
-  console.log(`   API key: ${API_KEY.slice(0, 18)}... (hidden from browser)\n`);
-});
+// ── Export for Vercel Serverless Function ──
+module.exports = app;
+
+// ── Only listen actively if run locally via Node ──
+if (require.main === module) {
+  app.listen(PORT, () => {
+    console.log(`\n🥗 GetDieted server running at http://localhost:${PORT}`);
+    console.log(`   API key: ${API_KEY.substring(0, 18)}... (hidden from browser)\n`);
+  });
+}
