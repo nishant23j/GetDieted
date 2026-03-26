@@ -31,7 +31,7 @@ app.use(express.json({ limit: '2mb' }));
 app.use(cors());
 
 // ── Serve static frontend files ──
-app.use(express.static(path.join(__dirname)));
+app.use(express.static(path.join(__dirname, 'public')));
 
 // ─────────────────────────────────
 // POST /api/diet  — Anthropic proxy
@@ -41,7 +41,7 @@ app.all('/api/diet', dietHandler);
 
 // ── Fallback: serve index.html for any unknown GET ──
 app.get('*', (req, res) => {
-  res.sendFile(path.join(__dirname, 'index.html'));
+  res.sendFile(path.join(__dirname, 'public', 'index.html'));
 });
 
 // ── Export for Vercel Serverless Function ──
